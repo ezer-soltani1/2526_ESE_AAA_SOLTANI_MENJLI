@@ -1,0 +1,7 @@
+../Core/Src/motor_control/motor.c:16:6:motor_init	8	static
+../Core/Src/motor_control/motor.c:30:6:motor_start_pwm	8	static
+../Core/Src/motor_control/motor.c:41:6:motor_stop_pwm	8	static
+../Core/Src/motor_control/motor.c:52:6:motor_set_PWM	16	static
+../Core/Src/motor_control/motor.c:75:5:cmd_motor_start	32	static
+../Core/Src/motor_control/motor.c:83:5:cmd_motor_stop	32	static
+../Core/Src/motor_control/motor.c:91:5:cmd_motor_speed	48	static

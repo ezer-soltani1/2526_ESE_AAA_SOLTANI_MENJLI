@@ -6,7 +6,7 @@
  */
 
 #include "app.h"
-
+#include "motor_control/motor.h"
 #include "user_interface/shell.h"
 
 static char shell_uart2_received_char;
@@ -27,7 +27,7 @@ void init_device(void){
 //
 // Initialisation motor control
 	// MOTOR
-//	motor_init();
+	motor_init();
 	// ASSERV (PID)
 //	asserv_init();
 //
