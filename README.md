@@ -9,3 +9,19 @@
 - Prendre en main le hacheur,
 - Faire un premier essai de commande moteur.
 
+### Configuration: 
+
+![image]()
+
+![image]()
+
+![image]()
+
+![image]()
+
+Le calcul du temp_mort:
+
+> 1/170MHZ = 5.88ns = 1 tic
+> khghk
+
+
