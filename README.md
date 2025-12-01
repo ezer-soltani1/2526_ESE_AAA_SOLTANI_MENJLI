@@ -25,7 +25,8 @@ Le calcul du temp_mort:
 ![image](tek00010.png)
 
 ![image](tek00009.png)
-
  
+## Implement Speed Control Function:
+![image](shellmotorcontrol.png)
 
 
