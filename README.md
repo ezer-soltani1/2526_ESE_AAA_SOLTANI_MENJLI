@@ -23,7 +23,7 @@ Le calcul du temp_mort:
 
 > 1/170MHZ = 5.88ns = 1 tic
 
-> (32+(DTG -192)) 8 t_clk => DTG= 202
+>temp_mort= (32+(DTG -192)) 8 t_clk =2us => DTG= 202
  
 
 
