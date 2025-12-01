@@ -11,13 +11,9 @@
 
 ### Configuration: 
 
-![image]()
+![image](configarr.png)
 
-![image]()
-
-![image]()
-
-![image]()
+![image](configdeadtime.png)
 
 Le calcul du temp_mort:
 
@@ -26,8 +22,9 @@ Le calcul du temp_mort:
 >temp_mort= DTG * t_clk =200ns => DTG= 34
  ### Affichage sur l'oscilloscope:
 
-![image]()
+![image](tek00010)
 
+![image](tek00009)
 
  
 
