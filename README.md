@@ -28,9 +28,15 @@ Le calcul du temp_mort:
  
 ## Implimentation les fonctions de controle:
 ![image](shelltest.png)
+
 **speed 4250**
+
 ![image](speed4250.png)
+
 **speed 6000**
+
 ![image](speed6000.png)
+
 **speed 1000**
+
 ![image](speed1000.png)
