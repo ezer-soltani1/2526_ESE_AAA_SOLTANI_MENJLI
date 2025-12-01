@@ -17,8 +17,6 @@ void motor_init(void)
 {
 	// Ensure PWMs are stopped initially
 	motor_stop_pwm();
-
-	// Set initial duty cycle to 50% (Stop for complementary control)
 	motor_set_PWM(PWM_MAX_VAL / 2);
 
 	// Register shell commands
@@ -54,20 +52,9 @@ void motor_set_PWM(int value)
 	// Clamp value
 	if (value < PWM_MIN_VAL) value = PWM_MIN_VAL;
 	if (value > PWM_MAX_VAL) value = PWM_MAX_VAL;
-
-	// Update CCR registers
-	// For basic complementary control:
-	// - If we want 0 speed (50% duty cycle), both legs switch at 50%.
-	// - For simplicity in this TP step, we apply the same duty to both channels
-	//   BUT to create a voltage difference, one would typically need 
-	//   differential control (Duty on U = D, Duty on V = 1-D).
-	//   However, "Commande décalée" often implies shifting phase or specific topology.
-	//   Given the instructions "Générer 4 PWM... rapport cyclique à 60%", 
-	//   we will set BOTH channels to the requested 'value' for testing signal generation.
-	//   (Note: To drive the motor, logic usually requires U=Duty, V=Complementary, or H-Bridge logic).
 	
 	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_U, value);
-	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, value); // Apply same for test, or (PWM_MAX_VAL - value) for differential
+	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, value);
 }
 
 /* --- Shell Commands --- */

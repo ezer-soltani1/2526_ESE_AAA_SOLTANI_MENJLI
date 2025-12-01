@@ -37,15 +37,15 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   CONTENTS, READONLY, DEBUGGING, OCTETS
  16 .debug_macro  000295d4  00000000  00000000  0002c600  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   0001c4f6  00000000  00000000  00055bd4  2**0
+ 17 .debug_line   0001c4f3  00000000  00000000  00055bd4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00113215  00000000  00000000  000720ca  2**0
+ 18 .debug_str    00113215  00000000  00000000  000720c7  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000043  00000000  00000000  001852df  2**0
+ 19 .comment      00000043  00000000  00000000  001852dc  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  000063b4  00000000  00000000  00185324  2**2
+ 20 .debug_frame  000063b4  00000000  00000000  00185320  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 21 .debug_line_str 00000080  00000000  00000000  0018b6d8  2**0
+ 21 .debug_line_str 00000080  00000000  00000000  0018b6d4  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -2283,8 +2283,8 @@ void MX_TIM1_Init(void)
   sBreakDeadTimeConfig.LockLevel = TIM_LOCKLEVEL_OFF;
  8000ff8:	2300      	movs	r3, #0
  8000ffa:	60fb      	str	r3, [r7, #12]
-  sBreakDeadTimeConfig.DeadTime = 202;
- 8000ffc:	23ca      	movs	r3, #202	@ 0xca
+  sBreakDeadTimeConfig.DeadTime = 34;
+ 8000ffc:	2322      	movs	r3, #34	@ 0x22
  8000ffe:	613b      	str	r3, [r7, #16]
   sBreakDeadTimeConfig.BreakState = TIM_BREAK_DISABLE;
  8001000:	2300      	movs	r3, #0
@@ -3168,8 +3168,6 @@ void motor_init(void)
 	// Ensure PWMs are stopped initially
 	motor_stop_pwm();
  8001534:	f000 f842 	bl	80015bc <motor_stop_pwm>
-
-	// Set initial duty cycle to 50% (Stop for complementary control)
 	motor_set_PWM(PWM_MAX_VAL / 2);
  8001538:	f241 009a 	movw	r0, #4250	@ 0x109a
  800153c:	f000 f854 	bl	80015e8 <motor_set_PWM>
@@ -3289,17 +3287,13 @@ void motor_set_PWM(int value)
  8001602:	dd02      	ble.n	800160a <motor_set_PWM+0x22>
  8001604:	f242 1334 	movw	r3, #8500	@ 0x2134
  8001608:	607b      	str	r3, [r7, #4]
-	//   However, "Commande décalée" often implies shifting phase or specific topology.
-	//   Given the instructions "Générer 4 PWM... rapport cyclique à 60%", 
-	//   we will set BOTH channels to the requested 'value' for testing signal generation.
-	//   (Note: To drive the motor, logic usually requires U=Duty, V=Complementary, or H-Bridge logic).
 	
 	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_U, value);
  800160a:	4b07      	ldr	r3, [pc, #28]	@ (8001628 <motor_set_PWM+0x40>)
  800160c:	681b      	ldr	r3, [r3, #0]
  800160e:	687a      	ldr	r2, [r7, #4]
  8001610:	635a      	str	r2, [r3, #52]	@ 0x34
-	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, value); // Apply same for test, or (PWM_MAX_VAL - value) for differential
+	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, value);
  8001612:	4b05      	ldr	r3, [pc, #20]	@ (8001628 <motor_set_PWM+0x40>)
  8001614:	681b      	ldr	r3, [r3, #0]
  8001616:	687a      	ldr	r2, [r7, #4]
