@@ -1,7 +1,8 @@
-../Core/Src/motor_control/motor.c:16:6:motor_init	8	static
-../Core/Src/motor_control/motor.c:28:6:motor_start_pwm	8	static
-../Core/Src/motor_control/motor.c:39:6:motor_stop_pwm	8	static
-../Core/Src/motor_control/motor.c:50:6:motor_set_PWM	16	static
-../Core/Src/motor_control/motor.c:62:5:cmd_motor_start	32	static
-../Core/Src/motor_control/motor.c:70:5:cmd_motor_stop	32	static
-../Core/Src/motor_control/motor.c:78:5:cmd_motor_speed	48	static
+../Core/Src/motor_control/motor.c:20:6:motor_init	8	static
+../Core/Src/motor_control/motor.c:39:6:motor_start_pwm	8	static
+../Core/Src/motor_control/motor.c:50:6:motor_stop_pwm	8	static
+../Core/Src/motor_control/motor.c:61:6:motor_set_PWM	16	static
+../Core/Src/motor_control/motor.c:69:6:motor_ramp_task	4	static
+../Core/Src/motor_control/motor.c:92:5:cmd_motor_start	32	static
+../Core/Src/motor_control/motor.c:100:5:cmd_motor_stop	32	static
+../Core/Src/motor_control/motor.c:108:5:cmd_motor_speed	40	static

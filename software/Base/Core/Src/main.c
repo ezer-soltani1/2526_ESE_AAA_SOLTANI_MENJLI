@@ -26,6 +26,7 @@
 /* Private includes ----------------------------------------------------------*/
 /* USER CODE BEGIN Includes */
 #include "app.h"
+#include "motor_control/motor.h" // Include motor header for ramp task
 
 /* USER CODE END Includes */
 
@@ -47,6 +48,7 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
+static uint32_t ramp_timer_counter = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -176,6 +178,12 @@ void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
   if (htim->Instance == TIM6)
   {
     HAL_IncTick();
+	// Check if RAMP_UPDATE_PERIOD_MS has elapsed
+	ramp_timer_counter++;
+	if (ramp_timer_counter >= RAMP_UPDATE_PERIOD_MS) {
+		motor_ramp_task();
+		ramp_timer_counter = 0;
+	}
   }
   /* USER CODE BEGIN Callback 1 */
 

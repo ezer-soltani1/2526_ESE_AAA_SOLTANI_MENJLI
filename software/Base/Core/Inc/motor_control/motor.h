@@ -19,6 +19,10 @@
 #define PWM_MAX_VAL 8500 // ARR + 1 (Period 8499)
 #define PWM_MIN_VAL 0
 
+// Ramp parameters
+#define RAMP_STEP_INCREMENT 50       // How much to change current_speed_pwm each ramp update
+#define RAMP_UPDATE_PERIOD_MS 10     // How often to update the ramp (in ms)
+
 /**
  * @brief Initializes the motor control module (PWM start, shell commands).
  */
@@ -28,6 +32,7 @@ void motor_init(void);
  * @brief Sets the PWM duty cycle for the motor.
  * @param value Duty cycle value (0 to PWM_MAX_VAL).
  *              Typically, PWM_MAX_VAL/2 = Speed 0.
+ *              This function now sets the target speed for the ramp.
  */
 void motor_set_PWM(int value);
 
@@ -40,5 +45,11 @@ void motor_start_pwm(void);
  * @brief Stops the PWM generation on U and V channels.
  */
 void motor_stop_pwm(void);
+
+/**
+ * @brief Task to update the motor speed progressively (ramp).
+ *        Should be called periodically (e.g., from a timer interrupt).
+ */
+void motor_ramp_task(void);
 
 #endif /* INC_MOTOR_CONTROL_MOTOR_H_ */
