@@ -22,9 +22,9 @@ Le calcul du temp_mort:
 >temp_mort= DTG * t_clk =200ns => DTG= 34
  ### Affichage sur l'oscilloscope:
 
-![image](tek00010)
+![image](tek00010.png)
 
-![image](tek00009)
+![image](tek00009.png)
 
  
 
