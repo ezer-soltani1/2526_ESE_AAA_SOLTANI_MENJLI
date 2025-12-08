@@ -17,7 +17,7 @@
 
 Le calcul du temp_mort:
 
-> t_clk = 1/170MHZ = 5.88ns = 1 tic
+> t_clk = 1/170MHz = 5.88ns = 1 tic
 
 >temp_mort= DTG * t_clk =200ns => DTG= 34
  ### Affichage sur l'oscilloscope:
