@@ -40,3 +40,7 @@ Le calcul du temp_mort:
 **speed 75%**
 
 ![image](75.png)
+
+### Premier test avec un rapport cyclique de 75%
+
+![image](tek0052.png)
