@@ -25,7 +25,7 @@ void motor_init(void)
 
 	// Apply initial duty cycle immediately
 	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_U, current_speed_pwm);
-	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, current_speed_pwm);
+	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, PWM_MAX_VAL - current_speed_pwm);
 
 	// Ensure PWMs are stopped initially
 	motor_stop_pwm();
@@ -83,7 +83,7 @@ void motor_ramp_task(void)
 
 	// Apply the current speed to PWM
 	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_U, current_speed_pwm);
-	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, current_speed_pwm);
+	__HAL_TIM_SET_COMPARE(MOTOR_TIM_HANDLE, MOTOR_TIM_CHANNEL_V, PWM_MAX_VAL - current_speed_pwm);
 }
 
 
@@ -109,15 +109,24 @@ int cmd_motor_speed(h_shell_t* h_shell, int argc, char** argv)
 {
 	if (argc < 2)
 	{
-		int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Usage: speed <value>\r\n");
+		int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Usage: speed <percentage 0-100>\r\n");
 		h_shell->drv.transmit(h_shell->print_buffer, size);
 		return -1;
 	}
 
-	int speed_val = atoi(argv[1]);
-	motor_set_PWM(speed_val);
+	int speed_val_percent = atoi(argv[1]);
+	if (speed_val_percent < 0 || speed_val_percent > 100)
+	{
+		int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Error: Percentage must be between 0 and 100.\r\n");
+		h_shell->drv.transmit(h_shell->print_buffer, size);
+		return -1;
+	}
 
-	int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Target speed set to %d\r\n", speed_val);
+	// Convert percentage to raw PWM value
+	int speed_val_raw = (speed_val_percent * PWM_MAX_VAL) / 100;
+	motor_set_PWM(speed_val_raw);
+
+	int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Target speed set to %d%% (raw: %d)\r\n", speed_val_percent, speed_val_raw);
 	h_shell->drv.transmit(h_shell->print_buffer, size);
 	return 0;
 }

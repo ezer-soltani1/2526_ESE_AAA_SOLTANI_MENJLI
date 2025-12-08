@@ -16,7 +16,7 @@
 #define MOTOR_TIM_CHANNEL_U TIM_CHANNEL_1
 #define MOTOR_TIM_CHANNEL_V TIM_CHANNEL_2
 
-#define PWM_MAX_VAL 8500 // ARR + 1 (Period 8499)
+#define PWM_MAX_VAL 4250 // ARR + 1 (Period 4249)
 #define PWM_MIN_VAL 0
 
 // Ramp parameters

@@ -159,7 +159,25 @@ void SystemClock_Config(void)
 }
 
 /* USER CODE BEGIN 4 */
+void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
+{
+  /* USER CODE BEGIN Callback 0 */
 
+  /* USER CODE END Callback 0 */
+  if (htim->Instance == TIM6)
+  {
+    HAL_IncTick();
+    // Check if RAMP_UPDATE_PERIOD_MS has elapsed
+    ramp_timer_counter++;
+    if (ramp_timer_counter >= RAMP_UPDATE_PERIOD_MS) {
+        motor_ramp_task();
+        ramp_timer_counter = 0;
+    }
+  }
+  /* USER CODE BEGIN Callback 1 */
+
+  /* USER CODE END Callback 1 */
+}
 /* USER CODE END 4 */
 
 /**
@@ -170,25 +188,6 @@ void SystemClock_Config(void)
   * @param  htim : TIM handle
   * @retval None
   */
-void HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)
-{
-  /* USER CODE BEGIN Callback 0 */
-
-  /* USER CODE END Callback 0 */
-  if (htim->Instance == TIM6)
-  {
-    HAL_IncTick();
-	// Check if RAMP_UPDATE_PERIOD_MS has elapsed
-	ramp_timer_counter++;
-	if (ramp_timer_counter >= RAMP_UPDATE_PERIOD_MS) {
-		motor_ramp_task();
-		ramp_timer_counter = 0;
-	}
-  }
-  /* USER CODE BEGIN Callback 1 */
-
-  /* USER CODE END Callback 1 */
-}
 
 /**
   * @brief  This function is executed in case of error occurrence.
