@@ -46,3 +46,8 @@ Le calcul du temp_mort:
 ![image](tek00052.png)
 
 Remarque : Lors du passage direct de 50 % à 75 % de rapport cyclique, une montée brusque du régime moteur est observée. Cette variation soudaine peut engendrer des risques d’endommagement du moteur et de l’électronique de commande.
+
+### Mesure de courant:
+
+### Mesure de vitesse:
+
