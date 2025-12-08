@@ -27,7 +27,7 @@ Le calcul du temp_mort:
 ![image](tek00009.png)
  
 ## Implimentation les fonctions de controle:
-![image](shelltest.png)
+![image](shell.png)
 
 **speed 50%**
 
