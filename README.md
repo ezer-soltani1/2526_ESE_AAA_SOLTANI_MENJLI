@@ -48,6 +48,20 @@ Le calcul du temp_mort:
 Remarque : Lors du passage direct de 50 % à 75 % de rapport cyclique, une montée brusque du régime moteur est observée. Cette variation soudaine peut engendrer des risques d’endommagement du moteur et de l’électronique de commande.
 
 ### Mesure de courant:
+#### 1. Définir les courants à mesurer
+  * Pour piloter une MCC avec un pont en H, le courant à mesurer en priorité est le courant moteur, car il est directement lié au couple et à la protection du moteur.
+Dans notre montage, la MCC est branchée entre les phases U et V, donc :
+
+
+𝐼u = −𝐼v
+​
+
+La mesure de 𝐼u est suffisante.
+
+  * Le courant du bus continu I_bus peut aussi être mesuré pour la protection globale et la supervision de la puissance.
+#### 2. Définir les fonctions de transfert des capteurs de courant
+
+
 
 ### Mesure de vitesse:
 
