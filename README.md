@@ -126,6 +126,8 @@ void input_analog_init(void)
   
 ![image](adc_dma1.png)
 
+### Mesure de vitesse:
+
 #### 1. Interface Hardware (MAX3097E)
 D'après la datasheet fournie (**MAX3097E**), l'interface entre le codeur et le STM32 est assurée par un récepteur de ligne RS-422/RS-485 triple haute vitesse. Il convertit les signaux différentiels (A, /A, B, /B, Z, /Z) provenant du codeur incrémental en signaux logiques TTL/CMOS (A, B, Z) exploitables par le microcontrôleur.
 
