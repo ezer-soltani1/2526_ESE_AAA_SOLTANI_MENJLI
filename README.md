@@ -52,16 +52,43 @@ Remarque : Lors du passage direct de 50 % à 75 % de rapport cyclique, une mont�
   * Pour piloter une MCC avec un pont en H, le courant à mesurer en priorité est le courant moteur, car il est directement lié au couple et à la protection du moteur.
 Dans notre montage, la MCC est branchée entre les phases U et V, donc :
 
-
 𝐼u = −𝐼v
 ​
-
 La mesure de 𝐼u est suffisante.
 
   * Le courant du bus continu I_bus peut aussi être mesuré pour la protection globale et la supervision de la puissance.
 #### 2. Définir les fonctions de transfert des capteurs de courant
+**DataSheet capteur du courant:**
 
+![image](cap_courant.jpeg)
 
+**Fonction de transfert:**
+
+* Capteur : V_out = V_off+ I * S
+* Courant mesuré : I = (V_out - V_off)/S
+* Conversion ADC : I = (((ADC/4095)*3.3) - V_off) / 0.08
+
+**Broches STM32 utilisées:**
+
+* Courant Phase U (Iu)
+
+Pin : PA1
+
+ADC : ADC1_IN2
+
+Usage : mesure du courant moteur
+
+* Courant Bus (I_bus)
+
+Pin : PC2
+
+ADC : ADC1_IN8
+
+Usage : protection
+
+**Première mesure avec ADC en Polling:**
+
+**deuxième mesure avec ADC en DMA:**
 
 ### Mesure de vitesse:
 
