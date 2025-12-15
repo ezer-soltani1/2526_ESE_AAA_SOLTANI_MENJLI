@@ -66,7 +66,7 @@ La mesure de 𝐼u est suffisante.
 
 * Capteur : V_out = V_off+ I * S
 * Courant mesuré : I = (V_out - V_off)/S
-* Conversion ADC : I = (((ADC/4095)*3.3) - V_off) / 0.08
+* Conversion ADC : I = (((ADC/4095)*3.3) - V_off) / 0.05
 
 **Broches STM32 utilisées:**
 
