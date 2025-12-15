@@ -124,7 +124,7 @@ void input_analog_init(void)
 
 * Résultat sur terminal:
   
-![image](adc_dma.png)
+![image](adc_dma1.png)
 
 ### Mesure de vitesse:
 
