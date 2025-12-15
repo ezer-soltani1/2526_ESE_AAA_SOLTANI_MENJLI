@@ -126,7 +126,7 @@ int cmd_motor_speed(h_shell_t* h_shell, int argc, char** argv)
 	int speed_val_raw = (speed_val_percent * PWM_MAX_VAL) / 100;
 	motor_set_PWM(speed_val_raw);
 
-	int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Target speed set to %d%% (raw: %d)\r\n", speed_val_percent, speed_val_raw);
+	int size = snprintf(h_shell->print_buffer, SHELL_PRINT_BUFFER_SIZE, "Target speed set to %d%% (CCR: %d)\r\n", speed_val_percent, speed_val_raw);
 	h_shell->drv.transmit(h_shell->print_buffer, size);
 	return 0;
 }

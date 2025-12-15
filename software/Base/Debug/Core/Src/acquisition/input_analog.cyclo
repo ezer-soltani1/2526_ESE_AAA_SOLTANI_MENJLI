@@ -1,0 +1,4 @@
+../Core/Src/acquisition/input_analog.c:16:6:input_analog_init	1
+../Core/Src/acquisition/input_analog.c:25:7:input_analog_get_u_current	1
+../Core/Src/acquisition/input_analog.c:31:6:HAL_ADC_ConvCpltCallback	2
+../Core/Src/acquisition/input_analog.c:39:5:cmd_imes	1

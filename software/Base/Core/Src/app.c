@@ -7,6 +7,7 @@
 
 #include "app.h"
 #include "motor_control/motor.h"
+#include "acquisition/input_analog.h"
 #include "user_interface/shell.h"
 
 static char shell_uart2_received_char;
@@ -20,7 +21,7 @@ void init_device(void){
 	HAL_UART_Receive_IT(&huart2, (uint8_t *)&shell_uart2_received_char, 1);
 
 	// LED
-	led_init();
+	//led_init();
 
 	// BUTTON
 //	button_init();
@@ -33,9 +34,9 @@ void init_device(void){
 //
 // Initialisation data acquistion
 	// ANALOG INPUT
-//	input_analog_init();
+	input_analog_init();
 	// ENCODER INPUT
-//	input_encoder_init();
+	//input_encoder_init();
 }
 
 uint8_t shell_uart2_transmit(const char *pData, uint16_t size)
@@ -52,7 +53,6 @@ uint8_t shell_uart2_receive(char *pData, uint16_t size)
 
 void HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart) {
 	if (huart->Instance == USART2) {
-		//		HAL_UART_Transmit(&huart2, (uint8_t *)&shell_uart2_received_char, 1, HAL_MAX_DELAY);
 		HAL_UART_Receive_IT(&huart2, (uint8_t *)&shell_uart2_received_char, 1);
 		shell_run(&hshell1);
 	}
