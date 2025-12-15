@@ -126,3 +126,35 @@ void input_analog_init(void)
   
 ![image](adc_dma1.png)
 
+#### 1. Interface Hardware (MAX3097E)
+D'après la datasheet fournie (**MAX3097E**), l'interface entre le codeur et le STM32 est assurée par un récepteur de ligne RS-422/RS-485 triple haute vitesse. Il convertit les signaux différentiels (A, /A, B, /B, Z, /Z) provenant du codeur incrémental en signaux logiques TTL/CMOS (A, B, Z) exploitables par le microcontrôleur.
+
+#### 2. Configuration du Timer (TIM3)
+Le projet de base configurait le TIM3 en mode "Hall Sensor". Pour utiliser le codeur incrémental relié au MAX3097E, nous devons reconfigurer le Timer en **Mode Encodeur (Encoder Interface)**.
+*   **Mode :** Encoder Mode TI1 and TI2 (comptage sur les fronts des deux signaux A et B).
+*   **Conséquence :** Le compteur s'incrémente/décrémente 4 fois par période du signal codeur (Quadrature X4).
+
+#### 3. Fonction de transfert et Calcul de vitesse
+La vitesse angulaire $\Omega$ (en rad/s) est calculée en dérivant la position (variation du nombre de tics).
+
+$$ \Omega = \frac{2\pi \cdot \Delta N}{R \cdot 4 \cdot T} $$
+
+Où :
+*   $\Delta N$ : Variation du compteur (CNT) entre deux appels de la boucle d'asservissement.
+*   $R$ : Résolution physique du codeur (nombre d'impulsions par tour).
+*   $4$ : Facteur de multiplication dû au mode quadrature (TI1+TI2).
+*   $T$ : Période d'échantillonnage de la boucle de vitesse (ex: 10 ms).
+
+#### 4. Constante de temps mécanique
+La constante de temps mécanique $\tau_m$ caractérise l'inertie du système. Elle se détermine expérimentalement :
+*   Envoyer un échelon de tension au moteur (ex: de 0% à 50% de PWM).
+*   Relever la courbe de vitesse.
+*   $\tau_m$ correspond au temps nécessaire pour atteindre **63% de la vitesse finale**.
+
+#### 5. Broches STM32 utilisées
+*   **TIM3_CH1** : PA6 (Signal A)
+*   **TIM3_CH2** : PA4 (Signal B)
+*   **TIM3_CH3** : PC8 (Signal Z - Index, optionnel pour la vitesse)
+
+#### 6. Fréquence d'asservissement
+Une tâche périodique sera exécutée toutes les **10 ms (100 Hz)** pour lire le compteur, calculer la vitesse et mettre à jour la commande (Asservissement).
