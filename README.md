@@ -87,8 +87,44 @@ ADC : ADC1_IN8
 Usage : protection
 
 **Première mesure avec ADC en Polling:**
+* La fonction du traitement:
+```c
+float input_get_analog_u_current()
+{
+	HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED); // Calibration
+	    HAL_ADC_Start(&hadc1);
+	    if (HAL_ADC_PollForConversion(&hadc1, HAL_MAX_DELAY) == HAL_OK)
+	    {
+	        adc_value = HAL_ADC_GetValue(&hadc1); // Lire la valeur brute
+	        double voltage = (adc_value * VREF) / ADC_MAX_VALUE; 
+	        double current = (voltage - 1.65) / SENSITIVITY;   
+	        HAL_ADC_Stop(&hadc1);// Arrêt de l'ADC
+	        return (float)current;
+	    }
+	    HAL_ADC_Stop(&hadc1); 
+	    return 0.0f;
+}
+```
+* Résultat sur terminal:
+
+![image](adc_polling.png)
 
 **deuxième mesure avec ADC en DMA:**
+* La fonction du traitement:
+```c
+void input_analog_init(void)
+{
+    shell_add(&hshell1, "imes", cmd_imes, "Measure Phase U Current (A)");
+    HAL_ADCEx_Calibration_Start(&hadc1, ADC_SINGLE_ENDED);
+    if (HAL_ADC_Start_DMA(&hadc1, (uint32_t*)adc_buffer, 1) != HAL_OK)
+    {
+    }
+}
+```
+
+* Résultat sur terminal:
+  
+![image](adc_dma.png)
 
 ### Mesure de vitesse:
 
