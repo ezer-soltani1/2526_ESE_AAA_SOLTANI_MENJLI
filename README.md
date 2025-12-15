@@ -126,5 +126,3 @@ void input_analog_init(void)
   
 ![image](adc_dma1.png)
 
-### Mesure de vitesse:
-
